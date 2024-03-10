@@ -1,0 +1,65 @@
+[gd_scene load_steps=10 format=3 uid="uid://3i5i4yfso3hd"]
+
+[ext_resource type="Script" path="res://Level/level.gd" id="1_0snyt"]
+[ext_resource type="PackedScene" uid="uid://drrgqn426cutn" path="res://Entities/player.tscn" id="2_udtl5"]
+[ext_resource type="PackedScene" uid="uid://jvlvirtg2p3h" path="res://Entities/enemy.tscn" id="3_45okn"]
+[ext_resource type="Script" path="res://Entities/enemy.gd" id="4_viuml"]
+[ext_resource type="PackedScene" uid="uid://cx7jmin36a81h" path="res://Entities/ball.tscn" id="5_igtab"]
+[ext_resource type="Script" path="res://Entities/prediction_zone.gd" id="6_rx0xc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_moh6e"]
+size = Vector2(1187, 24)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5a2k7"]
+size = Vector2(1191, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_21wua"]
+size = Vector2(12.5, 679)
+
+[node name="Level" type="Node2D"]
+script = ExtResource("1_0snyt")
+
+[node name="Background" type="ColorRect" parent="."]
+offset_right = 1151.0
+offset_bottom = 648.0
+color = Color(0.0745098, 0.0745098, 0.0745098, 1)
+
+[node name="player" parent="." instance=ExtResource("2_udtl5")]
+position = Vector2(68, 341)
+
+[node name="enemy" parent="." instance=ExtResource("3_45okn")]
+position = Vector2(1083, 317)
+script = ExtResource("4_viuml")
+
+[node name="Ball" parent="." instance=ExtResource("5_igtab")]
+unique_name_in_owner = true
+position = Vector2(572, 321)
+
+[node name="Walls" type="StaticBody2D" parent="."]
+collision_layer = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls"]
+position = Vector2(583.5, -12)
+shape = SubResource("RectangleShape2D_moh6e")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Walls"]
+position = Vector2(585.5, 659)
+shape = SubResource("RectangleShape2D_5a2k7")
+
+[node name="PredictionZone" type="Area2D" parent="."]
+position = Vector2(1217, 312)
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("6_rx0xc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PredictionZone"]
+position = Vector2(-141.25, 6.5)
+shape = SubResource("RectangleShape2D_21wua")
+
+[node name="Phantom Ball Holder" type="Node2D" parent="."]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(577, 323)
+
+[connection signal="area_entered" from="PredictionZone" to="enemy" method="_on_prediction_zone_area_entered"]
+[connection signal="area_entered" from="PredictionZone" to="PredictionZone" method="_on_area_entered"]
