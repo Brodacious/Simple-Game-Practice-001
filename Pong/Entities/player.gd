@@ -1,20 +1,13 @@
 extends CharacterBody2D
-var predictor_pos_y:float = 400
-var direction = Vector2.ZERO
-var speed = 30500
 
-func _ready() -> void:
-	Events.send_prediction_coordinates.connect(_update_target_position)
+var direction = Vector2.ZERO
+var max_speed = 30500
+var friction
+var acceleration
+
 
 func _process(delta: float) -> void:
 	move_and_slide()
-	velocity = speed * direction * delta
-	if abs(position.y - predictor_pos_y) > 35:
-		if position.y > predictor_pos_y:
-			direction = Vector2(0,-1)
-		elif position.y < predictor_pos_y:
-			direction = Vector2(0,1)
-	else:
-		direction = Vector2(0,0)
-func _update_target_position(pos_y):
-	predictor_pos_y = pos_y
+	direction = Input.get_("ui_left","ui_right","ui_up","ui_down")
+
+
