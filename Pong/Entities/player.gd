@@ -9,7 +9,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	move_and_slide()
 	velocity = speed * direction * delta
-	if abs(position.y - predictor_pos_y) > 25:
+	if abs(position.y - predictor_pos_y) > 35:
 		if position.y > predictor_pos_y:
 			direction = Vector2(0,-1)
 		elif position.y < predictor_pos_y:

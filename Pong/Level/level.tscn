@@ -14,7 +14,7 @@ size = Vector2(1187, 24)
 size = Vector2(1191, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_21wua"]
-size = Vector2(12.5, 679)
+size = Vector2(10, 639)
 
 [node name="Level" type="Node2D"]
 script = ExtResource("1_0snyt")
@@ -48,12 +48,16 @@ shape = SubResource("RectangleShape2D_5a2k7")
 
 [node name="PredictionZone" type="Area2D" parent="."]
 position = Vector2(1217, 312)
-collision_layer = 4
-collision_mask = 4
+collision_layer = 0
+collision_mask = 255
 script = ExtResource("6_rx0xc")
 
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="PredictionZone"]
+position = Vector2(-1126, 14)
+shape = SubResource("RectangleShape2D_21wua")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PredictionZone"]
-position = Vector2(-141.25, 6.5)
+position = Vector2(-151, 13)
 shape = SubResource("RectangleShape2D_21wua")
 
 [node name="Phantom Ball Holder" type="Node2D" parent="."]
@@ -63,3 +67,4 @@ position = Vector2(577, 323)
 
 [connection signal="area_entered" from="PredictionZone" to="enemy" method="_on_prediction_zone_area_entered"]
 [connection signal="area_entered" from="PredictionZone" to="PredictionZone" method="_on_area_entered"]
+[connection signal="body_entered" from="PredictionZone" to="PredictionZone" method="_on_body_entered"]
