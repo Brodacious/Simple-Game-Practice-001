@@ -16,5 +16,6 @@ func _process(delta: float) -> void:
 			direction = Vector2(0,1)
 	else:
 		direction = Vector2(0,0)
+#BUG This sometimes returns NIL, crashing
 func _update_target_position(pos_y):
 	predictor_pos_y = pos_y

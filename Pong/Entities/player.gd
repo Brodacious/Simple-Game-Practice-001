@@ -1,13 +1,17 @@
 extends CharacterBody2D
 
-var direction = Vector2.ZERO
-var max_speed = 30500
-var friction
-var acceleration
+var max_speed = 3500
+var friction = 0.2
+var acceleration = 50
+var direction = 0
 
-
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	move_and_slide()
-	direction = Input.get_("ui_left","ui_right","ui_up","ui_down")
-
-
+	velocity * deltas
+	if Input.is_action_pressed("up"):
+		velocity.y -= acceleration
+	elif Input.is_action_pressed("down"):
+		velocity.y += acceleration
+	else:
+		velocity.y = lerp(velocity.x,0.0,friction)
+	velocity.y = clamp(velocity.y, -max_speed, max_speed)
