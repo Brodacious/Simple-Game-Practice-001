@@ -14,5 +14,4 @@ func _ready() -> void:
 func _fire_phantom_ball(pos,direction):
 	var predictor_ball_instance = predictor_ball_preload.instantiate()
 	predictor_ball_instance.set_initial_velocity(pos,direction)
-	print("PHANTOM")
 	phantom_ball_holder.add_child(predictor_ball_instance)

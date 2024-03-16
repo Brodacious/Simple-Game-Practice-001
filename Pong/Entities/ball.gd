@@ -3,8 +3,7 @@ extends CharacterBody2D
 # Movement variables
 @export var speed = 100
 var direction = Vector2.ZERO
-#TODO replace with [-1,1]
-var x_array = [1]
+var x_array = [-1,1]
 var rand_x_value = x_array.pick_random()
 var direction_jitter: Vector2
 

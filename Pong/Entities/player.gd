@@ -7,7 +7,7 @@ var direction = 0
 
 func _physics_process(delta: float) -> void:
 	move_and_slide()
-	velocity * deltas
+	velocity * delta
 	if Input.is_action_pressed("up"):
 		velocity.y -= acceleration
 	elif Input.is_action_pressed("down"):
