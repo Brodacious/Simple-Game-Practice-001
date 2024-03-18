@@ -19,7 +19,7 @@ func _process(delta: float) -> void:
 	
 	if collision:
 		velocity = velocity.bounce(collision.get_normal())*1.01
-	direction_jitter = Vector2(0,randf_range(-0.3,0.3))
+	direction_jitter = Vector2(0,randf_range(-0.1,0.1))
 	direction = velocity.normalized()
 
 func _on_timer_timeout() -> void:

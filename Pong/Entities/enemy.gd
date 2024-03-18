@@ -1,22 +1,34 @@
 extends CharacterBody2D
-var predictor_pos_y:float = 400
-var direction = Vector2.ZERO
-var speed = 30500
+var predictor_pos_y:float =  400
+var direction:int
+var max_speed = 3500
+var acceleration = 50
+var friction = 0.6
 
 func _ready() -> void:
 	Events.send_prediction_coordinates.connect(_update_target_position)
 	global_position.y = 400
+
+# I HAVE NO FUCKING IDEA HOW THIS WORKS ANYMORE, IT DEFIES ME. It will do
+# ok enough, I don't care to improve it further
 func _process(delta: float) -> void:
 	move_and_slide()
-	velocity = speed * direction * delta
-	if abs(global_position.y - predictor_pos_y) > 25:
-		if global_position.y > predictor_pos_y:
-			direction = Vector2(0,-1)
-		elif global_position.y < predictor_pos_y:
-			direction = Vector2(0,1)
+	velocity * delta
+	if direction == 1:
+		velocity.y += acceleration
+	elif direction == -1:
+		velocity.y -= acceleration
 	else:
-		direction = Vector2(0,0)
-#BUG This sometimes returns NIL, crashing
+		velocity.y = lerp(velocity.y,0.0,friction)
+	
+	velocity.y = clamp(velocity.y, -max_speed, max_speed)
+	
+	if abs(predictor_pos_y - position.y) > 15:
+		if predictor_pos_y > position.y: direction = 1
+		else: direction = -1
+	else: direction = 0
+	print("I DON'T WANT TO BE THIS ANIMAL ANYMORE"+str(position.y))
 func _update_target_position(pos_y):
 	predictor_pos_y = pos_y
-	print("Recieved coordinate" + str(pos_y) + str(predictor_pos_y))
+	print("fuck"+str(predictor_pos_y))
+	print("asshole"+str(global_position.y))

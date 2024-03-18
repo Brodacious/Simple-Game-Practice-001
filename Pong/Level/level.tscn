@@ -14,7 +14,7 @@ size = Vector2(1187, 24)
 size = Vector2(1191, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_21wua"]
-size = Vector2(10, 639)
+size = Vector2(34, 639)
 
 [node name="Level" type="Node2D"]
 script = ExtResource("1_0snyt")
@@ -28,7 +28,8 @@ color = Color(0.0745098, 0.0745098, 0.0745098, 1)
 position = Vector2(68, 341)
 
 [node name="enemy" parent="." instance=ExtResource("3_45okn")]
-position = Vector2(1083, 317)
+position = Vector2(1083, 350)
+motion_mode = 1
 script = ExtResource("4_viuml")
 
 [node name="Ball" parent="." instance=ExtResource("5_igtab")]
@@ -47,13 +48,13 @@ position = Vector2(585.5, 659)
 shape = SubResource("RectangleShape2D_5a2k7")
 
 [node name="PredictionZone" type="Area2D" parent="."]
-position = Vector2(1217, 312)
+position = Vector2(1054, 315)
 collision_layer = 0
-collision_mask = 255
+collision_mask = 4
 script = ExtResource("6_rx0xc")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PredictionZone"]
-position = Vector2(-151, 13)
+position = Vector2(35, 8)
 shape = SubResource("RectangleShape2D_21wua")
 
 [node name="Phantom Ball Holder" type="Node2D" parent="."]
