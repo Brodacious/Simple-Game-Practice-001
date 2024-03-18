@@ -1,7 +1,8 @@
 [gd_scene load_steps=2 format=3 uid="uid://jvlvirtg2p3h"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_d1151"]
-size = Vector2(16, 76)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_su8t8"]
+radius = 8.0
+height = 86.0
 
 [node name="enemy" type="CharacterBody2D"]
 
@@ -12,4 +13,4 @@ offset_right = 8.0
 offset_bottom = 38.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_d1151")
+shape = SubResource("CapsuleShape2D_su8t8")

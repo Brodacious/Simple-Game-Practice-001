@@ -2,8 +2,9 @@
 
 [ext_resource type="Script" path="res://Entities/player.gd" id="1_m3oxj"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1uhsf"]
-size = Vector2(16, 76)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_r8au5"]
+radius = 8.0
+height = 88.0
 
 [node name="player" type="CharacterBody2D"]
 motion_mode = 1
@@ -16,4 +17,4 @@ offset_right = 8.0
 offset_bottom = 38.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_1uhsf")
+shape = SubResource("CapsuleShape2D_r8au5")

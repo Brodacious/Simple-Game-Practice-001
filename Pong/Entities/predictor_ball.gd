@@ -6,7 +6,7 @@ func _ready() -> void:
 # Called when the node enters the scene tree for the first time.
 func set_initial_velocity(pos,direction):
 	position = pos
-	var speed = 2000
+	var speed = 3500
 	linear_velocity = direction * speed
 
 

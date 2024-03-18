@@ -11,15 +11,21 @@ var direction_jitter: Vector2
 func _ready() -> void:
 	var ball_fire_direction = Vector2(rand_x_value,randf_range(0.8,1.2)).normalized()
 	velocity = speed * ball_fire_direction
-
+	Events.predictor_ball_spawn.emit(global_position,direction+direction_jitter)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	var collision = move_and_collide(velocity * delta)
+	if velocity.x < 500:
+		velocity.x * 1000
 	
 	if collision:
-		velocity = velocity.bounce(collision.get_normal())*1.01
-	direction_jitter = Vector2(0,randf_range(-0.1,0.1))
+		if velocity.x < 10:
+			velocity = velocity.bounce(collision.get_normal())*Vector2(1.08,1)*1.02
+			print("boing")
+		else:
+			velocity = velocity.bounce(collision.get_normal())*1.05
+	direction_jitter = Vector2(0,0)
 	direction = velocity.normalized()
 
 func _on_timer_timeout() -> void:
